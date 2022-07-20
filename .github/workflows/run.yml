@@ -176,16 +176,12 @@ jobs:
         run: |
           cd custom || exit 1
           go run ./ --datapath=../community/data
-      - name: Build dlc.dat file
-        run: |
-          cd custom || exit 1
-          go run ./ --datapath=../community/data
+
       - name: Move and zip files and generate sha256 hash
         run: |
           install -Dp ./geoip.dat ./publish/geoip.dat
           install -Dp ./geoip.dat.sha256sum ./publish/geoip.dat.sha256sum
           install -Dp ./custom/publish/geosite.dat ./publish/geosite.dat
-          install -Dp ./custom/publish/dlc.dat ./publish/dlc.dat
           install -p {proxy,direct,reject}-tld-list.txt ./publish/
           install -p {proxy,direct,reject}-list.txt ./publish/
           install -p {apple-cn,google-cn,gfw,greatfire,win-spy,win-update,win-extra}.txt ./publish/
