@@ -149,7 +149,7 @@ jobs:
       - name: Add custom lists
         run: |
           curl -sSL https://dbl.oisd.nl/basic/  >> oisdbasic
-		      cat oisdbasic > ./community/data/oisdbasic
+          cat oisdbasic > ./community/data/oisdbasic
 
       - name: Create `google-cn`、`apple-cn`、`gfw`、`greatfire` lists
         run: |
