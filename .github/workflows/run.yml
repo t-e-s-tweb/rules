@@ -21,6 +21,7 @@ jobs:
         run: |
           echo "RELEASE_NAME=Released on $(date +%Y%m%d%H%M)" >> $GITHUB_ENV
           echo "TAG_NAME=$(date +%Y%m%d%H%M)" >> $GITHUB_ENV
+          echo "OISD=https://dbl.oisd.nl/basic/" >> $GITHUB_ENV
           echo "CHINA_DOMAINS_URL=https://raw.githubusercontent.com/felixonmars/dnsmasq-china-list/master/accelerated-domains.china.conf" >> $GITHUB_ENV
           echo "GOOGLE_DOMAINS_URL=https://raw.githubusercontent.com/felixonmars/dnsmasq-china-list/master/google.china.conf" >> $GITHUB_ENV
           echo "APPLE_DOMAINS_URL=https://raw.githubusercontent.com/felixonmars/dnsmasq-china-list/master/apple.china.conf" >> $GITHUB_ENV
@@ -148,8 +149,7 @@ jobs:
           cp ./community/data/category-ads-all reject-list.txt
       - name: Add custom lists
         run: |
-          curl -sSL https://dbl.oisd.nl/basic/  >> oisdbasic
-          cat oisdbasic > ./community/data/oisdbasic
+          curl -sSL $OISD > ./community/data/oisd
 
       - name: Create `google-cn`、`apple-cn`、`gfw`、`greatfire` lists
         run: |
