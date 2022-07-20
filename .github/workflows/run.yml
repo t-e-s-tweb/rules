@@ -148,9 +148,8 @@ jobs:
           cp ./community/data/category-ads-all reject-list.txt
       - name: Add custom lists
         run: |
-          curl -sSL https://dbl.oisd.nl/basic/ > ./community/data/oisdbasic 
-          curl -sSL https://dbl.oisd.nl/ > ./community/data/oisdfull
-          curl -sSL https://anti-ad.net/domains.txt > ./community/data/antiad
+          curl -sSL https://dbl.oisd.nl/basic/  >> oisdbasic
+		      cat oisdbasic > ./community/data/oisdbasic
 
       - name: Create `google-cn`、`apple-cn`、`gfw`、`greatfire` lists
         run: |
