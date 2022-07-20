@@ -146,6 +146,14 @@ jobs:
           cp ./community/data/cn direct-list.txt
           cp ./community/data/geolocation-\!cn proxy-list.txt
           cp ./community/data/category-ads-all reject-list.txt
+      - name: Add custom lists
+        run: |
+          curl -sSL https://dbl.oisd.nl/basic/ > ./community/data/oisdbasic 
+          curl -sSL https://raw.githubusercontent.com/t-e-s-tweb/domain-list-community/master/data/tld-pk > ./community/data/tld-pk
+          curl -sSL https://dbl.oisd.nl/ > ./community/data/oisdfull
+          curl -sSL https://hblock.molinero.dev/hosts_domains.txt > ./community/data/hblock 
+          curl -sSL https://anti-ad.net/domains.txt > ./community/data/antiad
+          curl -sSL https://raw.githubusercontent.com/bongochong/CombinedPrivacyBlockLists/master/NoFormatting/BlacklistedDomains.txt > ./community/data/cpb          
 
       - name: Create `google-cn`、`apple-cn`、`gfw`、`greatfire` lists
         run: |
