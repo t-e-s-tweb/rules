@@ -151,7 +151,7 @@ jobs:
         run: |
           curl -sSL $FIREBOG | grep "0.0.0.0" | awk '{print $2}' > ./community/data/firebog
           curl -sSL $FIREBOG | grep "127.0.0.1" | awk '{print $2}' > ./community/data/firebog
-          curl -sSL $FIREBOG | perl -ne '/^server=\/([^\/]+)\// && print "full:$1\n"' > ./community/data/firebog
+          curl -sSL $FIREBOG | perl -ne '/^((?=^.{3,255})[a-zA-Z0-9][-_a-zA-Z0-9]{0,62}(\.[a-zA-Z0-9][-_a-zA-Z0-9]{0,62})+)/ && print "$1\n"' >> ./community/data/firebog
       - name: Create `google-cn`、`apple-cn`、`gfw`、`greatfire` lists
         run: |
           curl -sSL $GOOGLE_DOMAINS_URL | perl -ne '/^server=\/([^\/]+)\// && print "full:$1\n"' > ./community/data/google-cn
