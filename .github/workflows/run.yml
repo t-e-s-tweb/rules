@@ -149,7 +149,7 @@ jobs:
           cp ./community/data/category-ads-all reject-list.txt
       - name: Add custom lists
         run: |
-          curl -sSL $FIREBOG > ./community/data/firebog
+          curl -sSL $FIREBOG | perl -ne '/^\|\|([-_0-9a-zA-Z]+(\.[-_0-9a-zA-Z]+){1,64})\^$/ && print "$1\n"' | perl -ne 'print if not /^[0-9]{1,3}(\.[0-9]{1,3}){3}$/'  > ./community/data/firebog
       - name: Create `google-cn`、`apple-cn`、`gfw`、`greatfire` lists
         run: |
           curl -sSL $GOOGLE_DOMAINS_URL | perl -ne '/^server=\/([^\/]+)\// && print "full:$1\n"' > ./community/data/google-cn
