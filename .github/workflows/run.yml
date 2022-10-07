@@ -149,7 +149,7 @@ jobs:
           cp ./community/data/category-ads-all reject-list.txt
       - name: Add custom lists
         run: |
-          curl -sSL $OISDFULL | grep > ./community/data/firebog
+          curl -sSL $OISDFULL > ./community/data/oisdfull
           
       - name: Create `google-cn`、`apple-cn`、`gfw`、`greatfire` lists
         run: |
