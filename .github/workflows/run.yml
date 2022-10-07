@@ -21,7 +21,7 @@ jobs:
         run: |
           echo "RELEASE_NAME=Released on $(date +%Y%m%d%H%M)" >> $GITHUB_ENV
           echo "TAG_NAME=$(date +%Y%m%d%H%M)" >> $GITHUB_ENV
-          echo "FIREBOG=https://adguardlist.jakedev.workers.dev/" >> $GITHUB_ENV
+          echo "OISDFULL=https://dbl.oisd.nl/" >> $GITHUB_ENV
           echo "CHINA_DOMAINS_URL=https://raw.githubusercontent.com/felixonmars/dnsmasq-china-list/master/accelerated-domains.china.conf" >> $GITHUB_ENV
           echo "GOOGLE_DOMAINS_URL=https://raw.githubusercontent.com/felixonmars/dnsmasq-china-list/master/google.china.conf" >> $GITHUB_ENV
           echo "APPLE_DOMAINS_URL=https://raw.githubusercontent.com/felixonmars/dnsmasq-china-list/master/apple.china.conf" >> $GITHUB_ENV
@@ -149,9 +149,8 @@ jobs:
           cp ./community/data/category-ads-all reject-list.txt
       - name: Add custom lists
         run: |
-          curl -sSL $FIREBOG | grep "0.0.0.0" | awk '{print $2}' > ./community/data/firebog
-          curl -sSL $FIREBOG | grep "127.0.0.1" | awk '{print $2}' > ./community/data/firebog
-          curl -sSL $FIREBOG | perl -ne '/^((?=^.{3,255})[a-zA-Z0-9][-_a-zA-Z0-9]{0,62}(\.[a-zA-Z0-9][-_a-zA-Z0-9]{0,62})+)/ && print "$1\n"' >> ./community/data/firebog
+          curl -sSL $OISDFULL | grep > ./community/data/firebog
+          
       - name: Create `google-cn`、`apple-cn`、`gfw`、`greatfire` lists
         run: |
           curl -sSL $GOOGLE_DOMAINS_URL | perl -ne '/^server=\/([^\/]+)\// && print "full:$1\n"' > ./community/data/google-cn
