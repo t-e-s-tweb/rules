@@ -21,8 +21,8 @@ jobs:
         run: |
           echo "RELEASE_NAME=Released on $(date +%Y%m%d%H%M)" >> $GITHUB_ENV
           echo "TAG_NAME=$(date +%Y%m%d%H%M)" >> $GITHUB_ENV
-          echo "OISDFULL=https://dbl.oisd.nl/" >> $GITHUB_ENV
-          echo "STEVEN=https://scripttiger.github.io/alts/domains/blacklist.txt" >> $GITHUB_ENV          
+          echo "OISDFULL=https://github.com/SystemJargon/blocklists/blob/main/lists/firebog-ticklist.txt?raw=true" >> $GITHUB_ENV
+          echo "STEVEN=https://raw.githubusercontent.com/SystemJargon/blocklists/main/lists/threats/aggregated-threats-1.txt" >> $GITHUB_ENV          
           echo "CHINA_DOMAINS_URL=https://raw.githubusercontent.com/felixonmars/dnsmasq-china-list/master/accelerated-domains.china.conf" >> $GITHUB_ENV
           echo "GOOGLE_DOMAINS_URL=https://raw.githubusercontent.com/felixonmars/dnsmasq-china-list/master/google.china.conf" >> $GITHUB_ENV
           echo "APPLE_DOMAINS_URL=https://raw.githubusercontent.com/felixonmars/dnsmasq-china-list/master/apple.china.conf" >> $GITHUB_ENV
