@@ -22,6 +22,7 @@ jobs:
           echo "RELEASE_NAME=Released on $(date +%Y%m%d%H%M)" >> $GITHUB_ENV
           echo "TAG_NAME=$(date +%Y%m%d%H%M)" >> $GITHUB_ENV
           echo "LIGHT=https://raw.githubusercontent.com/hagezi/dns-blocklists/main/domains/light.txt" >> $GITHUB_ENV
+          echo "MULTI=https://raw.githubusercontent.com/hagezi/dns-blocklists/main/domains/multi.txt" >> $GITHUB_ENV
           echo "FAKE=https://raw.githubusercontent.com/hagezi/dns-blocklists/main/domains/fake.txt" >> $GITHUB_ENV
           echo "TIF=https://raw.githubusercontent.com/hagezi/dns-blocklists/main/domains/tif.txt" >> $GITHUB_ENV
           echo "PERSONAL=https://raw.githubusercontent.com/hagezi/dns-blocklists/main/domains/personal.txt" >> $GITHUB_ENV   
@@ -153,6 +154,7 @@ jobs:
       - name: Add custom lists
         run: |
           curl -sSL $LIGHT > ./community/data/light
+          curl -sSL $MULTI > ./community/data/multi
           curl -sSL $FAKE > ./community/data/fake
           curl -sSL $TIF > ./community/data/tif
           curl -sSL $PERSONAL > ./community/data/personal
