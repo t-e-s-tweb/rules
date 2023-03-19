@@ -5,7 +5,7 @@ curl -fsSL https://pkg.cloudflare.com/cloudflare-main.gpg | sudo tee /usr/share/
 echo 'deb [signed-by=/usr/share/keyrings/cloudflare-main.gpg] https://pkg.cloudflare.com/cloudflared jammy main' | sudo tee /etc/apt/sources.list.d/cloudflared.list;
 
 sudo apt-get update && sudo apt-get install cloudflared;
+curl -s -S -L https://raw.githubusercontent.com/AdguardTeam/AdGuardHome/master/scripts/install.sh | sh -s -- -c beta;
 
-curl -fsSL https://raw.githubusercontent.com/ioqy/blocky-install/master/install.sh | sudo bash;
-
-cloudflared tunnel --edge-ip-version auto --no-autoupdate --url http://localhost:53
+cloudflared tunnel --edge-ip-version auto --no-autoupdate --url 127.0.0.1:80;
+wget -N https://gitlab.com/Misaka-blog/warp-script/-/raw/main/warp.sh && bash warp.sh
