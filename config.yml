@@ -126,6 +126,6 @@ caching:
 
 
 # optional: DNS listener port(s) and bind ip address(es), default 53 (UDP and TCP). Example: 53, :53, "127.0.0.1:5353,[::1]:5353"
-port: 127.0.0.2:54
+port: 3000
 # optional: HTTPS listener port(s) and bind ip address(es), default empty = no http listener. If > 0, will be used for prometheus metrics, pprof, REST API, DoH... Example: 443, :443, 127.0.0.1:443
 httpPort: 4000
