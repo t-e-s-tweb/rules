@@ -1,20 +1,27 @@
 upstream:
   default:
     - https://open.dns0.eu/dns-query
-    - https://anycast.dns2.nextdns.io/dns-query
+    - https://1.1.1.1/dns-query
+    - tcp-tls:8.8.8.8:853
+    - tcp-tls:1.1.1.1:853
 bootstrapDns:
-  - tcp+udp:1.1.1.1
-  - tcp+udp:8.8.8.8
-  - tcp+udp:9.9.9.9
-  - https://1.1.1.1/dns-query
+  - upstream: https://dns.quad9.net/dns-query
+    ips:
+      - 9.9.9.9
+      - 149.112.112.112
   - upstream: https://dns.google/dns-query
     ips:
       - 8.8.8.8
+      - 8.8.4.4
+  - upstream: https://1.1.1.1/dns-query
+    ips:
+      - 1.1.1.1
+      - 1.0.0.1  
 connectIPVersion: v4
 
 # optional: use black and white lists to block queries (for example ads, trackers, adult pages etc.)
 blocking:
-  processingConcurrency: 8
+  processingConcurrency: 1
   # definition of blacklist groups. Can be external link (http/https) or local file
   blackLists:
     ads:
@@ -33,13 +40,13 @@ blocking:
   whiteLists:
     ads:
       - https://raw.githubusercontent.com/m0zgen/dns-hole/master/whitelist.txt
-    #  - https://raw.githubusercontent.com/ShadowWhisperer/BlockLists/master/Whitelists/Whitelist
+      - https://raw.githubusercontent.com/ShadowWhisperer/BlockLists/master/Whitelists/Whitelist
       - https://raw.githubusercontent.com/m0zgen/bld-agregator/data/allowlist.txt
      # - https://raw.githubusercontent.com/anudeepND/whitelist/master/domains/whitelist.txt
      # - https://raw.githubusercontent.com/anudeepND/whitelist/master/domains/optional-list.txt
-      #- https://raw.githubusercontent.com/hagezi/dns-blocklists/main/whitelist.txt
-      #- https://raw.githubusercontent.com/hagezi/dns-blocklists/main/whitelist-referral.txt
-      #- https://raw.githubusercontent.com/KEINOS/BlockList/main/whitelist.txt
+      - https://raw.githubusercontent.com/hagezi/dns-blocklists/main/whitelist.txt
+      - https://raw.githubusercontent.com/hagezi/dns-blocklists/main/whitelist-referral.txt
+      - https://raw.githubusercontent.com/KEINOS/BlockList/main/whitelist.txt
   # definition: which groups should be applied for which client
   clientGroupsBlock:
     # default will be used, if no special definition for a client name exists
@@ -48,15 +55,15 @@ blocking:
   blockType: zeroIp
   # optional: TTL for answers to blocked domains
   # default: 6h
-  blockTTL: 5m
+  blockTTL: 1m
   # optional: automatically list refresh period (in duration format). Default: 4h.
   # Negative value -> deactivate automatically refresh.
   # 0 value -> use default
-  refreshPeriod: 24h
+  refreshPeriod: 4h
   # optional: timeout for list download (each url). Default: 60s. Use large values for big lists or slow internet connections
-  downloadTimeout: 30s
+  downloadTimeout: 15m
   # optional: Download attempt timeout. Default: 60s
-  downloadAttempts: 3
+  downloadAttempts: 5
   # optional: Time between the download attempts. Default: 1s
   downloadCooldown: 10s
   # optional: if failOnError, application startup will fail if at least one list can't be downloaded / opened. Default: blocking
@@ -74,7 +81,7 @@ caching:
   maxTime: 24h
   # Max number of cache entries (responses) to be kept in cache (soft limit). Useful on systems with limited amount of RAM.
   # Default (0): unlimited
-  maxItemsCount: 5000
+  maxItemsCount: 20000
   # if true, will preload DNS results for often used queries (default: names queried more than 5 times in a 2-hour time window)
   # this improves the response time for often used queries, but significantly increases external traffic
   # default: false
@@ -84,19 +91,20 @@ caching:
   prefetchExpires: 2h
   # name queries threshold for prefetch
   # default: 5
-  prefetchThreshold: 5
+  prefetchThreshold: 3
   # Max number of domains to be kept in cache for prefetching (soft limit). Useful on systems with limited amount of RAM.
   # Default (0): unlimited
-  prefetchMaxItemsCount: 1000
+  prefetchMaxItemsCount: 10000
   # Time how long negative results (NXDOMAIN response or empty result) are cached. A value of -1 will disable caching for negative results.
   # Default: 30m
   cacheTimeNegative: 30m
-
+  
 log:
-  # optional: Log level (one from debug, info, warn, error). Default: info
-  level: info
+  level: warn
+  privacy: true
+
 ports:
   # optional: DNS listener port(s) and bind ip address(es), default 53 (UDP and TCP). Example: 53, :53, "127.0.0.1:5353,[::1]:5353"
   dns: 3000
-  # optional: Port(s) and optional bind ip address(es) to serve HTTPS used for prometheus metrics, pprof, REST API, DoH... If you wish to specify a specific IP, you can do so such as 192.168.0.1:443. Example: 443, :443, 127.0.0.1:443,[::1]:443
+  # optional: Port(s) and optional bind ip address(es) to serve HTTP used for prometheus metrics, pprof, REST API, DoH... If you wish to specify a specific IP, you can do so such as 192.168.0.1:4000. Example: 4000, :4000, 127.0.0.1:4000,[::1]:4000
   http: 8100
