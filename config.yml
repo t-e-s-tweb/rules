@@ -1,34 +1,7 @@
 upstream:
   default:
- #   - 'tcp-tls:1.0.0.1'
-    - 'https://doh.opendns.com/dns-query'
- #   - 'https://1.1.1.1/dns-query'
-    - 'tcp-tls:dns.quad9.net:853'
-    - 'https://dns.google/dns-query'
-    - 'https://dns.nextdns.io/dns-query'
-#    - https://res-acst1.absolight.net/dns-query
- #   - https://res-acst2.absolight.net/dns-query
-  #  - https://res-acst3.absolight.net/dns-query
-  #  - https://resolver1.absolight.net/dns-query
-  #  - https://resolver2.absolight.net/dns-query
-  #  - https://resolver3.absolight.net/dns-query
-    - https://unfiltered.adguard-dns.com/dns-query
- #   - https://doh.opendns.com/dns-query
-  #  - https://cloudflare-dns.com/dns-query
-  #  - https://mozilla.cloudflare-dns.com/dns-query
-    - https://security.cloudflare-dns.com/dns-query
-  #  - https://dns64.cloudflare-dns.com/dns-query
-    - https://dns.digitale-gesellschaft.ch/dns-query
-    - https://dns.dnswarden.com/uncensored
-    - https://doh.applied-privacy.net/query
-  #  - https://dns.google/dns-query
-  #  - https://dns64.dns.google/dns-query
-  #  - https://8888.google/dns-query
- #   - https://dns.nextdns.io/dns-query
- #   - https://dns.quad9.net/dns-query
-    - https://dns9.quad9.net/dns-query
- #   - https://dns10.quad9.net/dns-query
- #   - https://dns11.quad9.net/dns-query
+    - https://open.dns0.eu/dns-query
+    - https://anycast.dns2.nextdns.io/dns-query
 bootstrapDns:
   - tcp+udp:1.1.1.1
   - tcp+udp:8.8.8.8
@@ -37,7 +10,7 @@ bootstrapDns:
   - upstream: https://dns.google/dns-query
     ips:
       - 8.8.8.8
-connectIPVersion: dual
+connectIPVersion: v4
 
 # optional: use black and white lists to block queries (for example ads, trackers, adult pages etc.)
 blocking:
@@ -46,32 +19,27 @@ blocking:
   blackLists:
     ads:
       - https://raw.githubusercontent.com/hagezi/dns-blocklists/main/hosts/multi.txt
-    #  - https://raw.githubusercontent.com/hagezi/dns-blocklists/main/hosts/fake.txt
+      - https://raw.githubusercontent.com/hagezi/dns-blocklists/main/hosts/fake.txt
       - https://raw.githubusercontent.com/hagezi/dns-blocklists/main/hosts/tif.txt
-    #  - https://raw.githubusercontent.com/hagezi/dns-blocklists/main/hosts/personal.txt
-      - https://raw.githubusercontent.com/Luois45/DNSBlocklists/auto-update/Suspicious.txt
-    #  - https://raw.githubusercontent.com/Luois45/DNSBlocklists/auto-update/Advertising.txt
-      - https://raw.githubusercontent.com/Luois45/DNSBlocklists/auto-update/Malicious.txt
+      - https://raw.githubusercontent.com/hagezi/dns-blocklists/main/hosts/personal.txt
     #  - https://raw.githubusercontent.com/ShadowWhisperer/BlockLists/master/Lists/Scam
     #  - https://raw.githubusercontent.com/ShadowWhisperer/BlockLists/master/Lists/Malware
-    #  - https://github.com/ChathuraJW/my_pihole_addlists/blob/main/addlists/complete_addlist_tick.txt?raw=true
-      - https://raw.githubusercontent.com/m0zgen/dns-hole/master/dns-blacklist.txt
-      - https://raw.githubusercontent.com/m0zgen/dns-hole/master/malisious.txt
-    #  - https://raw.githubusercontent.com/r-a-y/mobile-hosts/master/AdguardDNS.txt
-      - https://raw.githubusercontent.com/KEINOS/BlockList/main/hosts.txt
+    #  - https://raw.githubusercontent.com/ShadowWhisperer/BlockLists/master/Lists/Cryptocurrency
+      - https://raw.githubusercontent.com/ShadowWhisperer/BlockLists/master/Lists/Typo
+    #  - https://raw.githubusercontent.com/ChathuraJW/my_pihole_addlists/main/addlists/complete_addlist_tick.txt
+    #  - https://raw.githubusercontent.com/m0zgen/dns-hole/master/dns-blacklist.txt
+    #  - https://raw.githubusercontent.com/m0zgen/dns-hole/master/malisious.txt
 # definition of whitelist groups. Attention: if the same group has black and whitelists, whitelists will be used to disable particular blacklist entries. If a group has only whitelist entries -> this means only domains from this list are allowed, all other domains will be blocked
   whiteLists:
     ads:
       - https://raw.githubusercontent.com/m0zgen/dns-hole/master/whitelist.txt
     #  - https://raw.githubusercontent.com/ShadowWhisperer/BlockLists/master/Whitelists/Whitelist
-      - https://raw.githubusercontent.com/m0zgen/dns-hole/master/vendors-wl/microsoft.txt
-    #  - https://raw.githubusercontent.com/m0zgen/dns-hole/master/vendors-wl/google.txt
-    #  - https://raw.githubusercontent.com/m0zgen/dns-hole/master/regex/common-wl.txt
-    #  - https://raw.githubusercontent.com/anudeepND/whitelist/master/domains/whitelist.txt
-    #  - https://raw.githubusercontent.com/anudeepND/whitelist/master/domains/optional-list.txt
-      - https://raw.githubusercontent.com/hagezi/dns-blocklists/main/whitelist.txt
-#      - https://raw.githubusercontent.com/hagezi/dns-blocklists/main/whitelist-referral.txt
-      - https://raw.githubusercontent.com/KEINOS/BlockList/main/whitelist.txt
+      - https://raw.githubusercontent.com/m0zgen/bld-agregator/data/allowlist.txt
+     # - https://raw.githubusercontent.com/anudeepND/whitelist/master/domains/whitelist.txt
+     # - https://raw.githubusercontent.com/anudeepND/whitelist/master/domains/optional-list.txt
+      #- https://raw.githubusercontent.com/hagezi/dns-blocklists/main/whitelist.txt
+      #- https://raw.githubusercontent.com/hagezi/dns-blocklists/main/whitelist-referral.txt
+      #- https://raw.githubusercontent.com/KEINOS/BlockList/main/whitelist.txt
   # definition: which groups should be applied for which client
   clientGroupsBlock:
     # default will be used, if no special definition for a client name exists
@@ -80,15 +48,15 @@ blocking:
   blockType: zeroIp
   # optional: TTL for answers to blocked domains
   # default: 6h
-  blockTTL: 1m
+  blockTTL: 5m
   # optional: automatically list refresh period (in duration format). Default: 4h.
   # Negative value -> deactivate automatically refresh.
   # 0 value -> use default
-  refreshPeriod: 4h
+  refreshPeriod: 24h
   # optional: timeout for list download (each url). Default: 60s. Use large values for big lists or slow internet connections
-  downloadTimeout: 6m
+  downloadTimeout: 30s
   # optional: Download attempt timeout. Default: 60s
-  downloadAttempts: 5
+  downloadAttempts: 3
   # optional: Time between the download attempts. Default: 1s
   downloadCooldown: 10s
   # optional: if failOnError, application startup will fail if at least one list can't be downloaded / opened. Default: blocking
@@ -103,10 +71,10 @@ caching:
   # If 0, use TTL
   # If > 0, use this value, if TTL is greater
   # Default: 0
-  maxTime: 12h
+  maxTime: 24h
   # Max number of cache entries (responses) to be kept in cache (soft limit). Useful on systems with limited amount of RAM.
   # Default (0): unlimited
-  maxItemsCount: 0
+  maxItemsCount: 5000
   # if true, will preload DNS results for often used queries (default: names queried more than 5 times in a 2-hour time window)
   # this improves the response time for often used queries, but significantly increases external traffic
   # default: false
@@ -116,16 +84,19 @@ caching:
   prefetchExpires: 2h
   # name queries threshold for prefetch
   # default: 5
-  prefetchThreshold: 3
+  prefetchThreshold: 5
   # Max number of domains to be kept in cache for prefetching (soft limit). Useful on systems with limited amount of RAM.
   # Default (0): unlimited
-  prefetchMaxItemsCount: 0
+  prefetchMaxItemsCount: 1000
   # Time how long negative results (NXDOMAIN response or empty result) are cached. A value of -1 will disable caching for negative results.
   # Default: 30m
   cacheTimeNegative: 30m
 
-
-# optional: DNS listener port(s) and bind ip address(es), default 53 (UDP and TCP). Example: 53, :53, "127.0.0.1:5353,[::1]:5353"
-port: 3000
-# optional: HTTPS listener port(s) and bind ip address(es), default empty = no http listener. If > 0, will be used for prometheus metrics, pprof, REST API, DoH... Example: 443, :443, 127.0.0.1:443
-httpPort: 4000
+log:
+  # optional: Log level (one from debug, info, warn, error). Default: info
+  level: error
+ports:
+  # optional: DNS listener port(s) and bind ip address(es), default 53 (UDP and TCP). Example: 53, :53, "127.0.0.1:5353,[::1]:5353"
+  dns: 3000
+  # optional: Port(s) and optional bind ip address(es) to serve HTTPS used for prometheus metrics, pprof, REST API, DoH... If you wish to specify a specific IP, you can do so such as 192.168.0.1:443. Example: 443, :443, 127.0.0.1:443,[::1]:443
+  http: 4000
