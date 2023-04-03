@@ -94,7 +94,7 @@ caching:
 
 log:
   # optional: Log level (one from debug, info, warn, error). Default: info
-  level: error
+  level: info
 ports:
   # optional: DNS listener port(s) and bind ip address(es), default 53 (UDP and TCP). Example: 53, :53, "127.0.0.1:5353,[::1]:5353"
   dns: 3000
