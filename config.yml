@@ -119,6 +119,7 @@ blocking:
       - https://raw.githubusercontent.com/hagezi/dns-blocklists/main/hosts/fake.txt
       - https://raw.githubusercontent.com/hagezi/dns-blocklists/main/hosts/tif.txt
       - https://raw.githubusercontent.com/hagezi/dns-blocklists/main/hosts/personal.txt
+      - https://nocdn.nrd-list.com/0/nrd-list-32-days.txt
     #  - https://raw.githubusercontent.com/ShadowWhisperer/BlockLists/master/Lists/Scam
     #  - https://raw.githubusercontent.com/ShadowWhisperer/BlockLists/master/Lists/Malware
     #  - https://raw.githubusercontent.com/ShadowWhisperer/BlockLists/master/Lists/Cryptocurrency
