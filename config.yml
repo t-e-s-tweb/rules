@@ -13,33 +13,15 @@ upstream:
     - https://1.1.1.1/dns-query
     - tcp-tls:1.0.0.1
     - https://1.0.0.1/dns-query
-    - https://cloudflare-dns.com/dns-query
-    - https://mozilla.cloudflare-dns.com/dns-query
-    - tcp-tls:dns.nextdns.io
-    - https://dns.nextdns.io
     - tcp-tls:anycast.dns.nextdns.io
     - https://anycast.dns.nextdns.io
-    - https://firefox.dns.nextdns.io
     - tcp-tls:open.dns0.eu
     - https://open.dns0.eu/dns-query
-    - tcp-tls:dns0.eu
-    - https://dns0.eu/dns-query
-    - tcp-tls:p0.freedns.controld.com
-    - https://freedns.controld.com/p0
-    - tcp-tls:uncensored.freedns.controld.com
-    - https://freedns.controld.com/uncensored
-    - tcp-tls:uncensored.dns.dnswarden.com
     - https://dns.dnswarden.com/uncensored
     - tcp-tls:dns-unfiltered.adguard.com
     - https://dns-unfiltered.adguard.com/dns-query
     - tcp-tls:doh.mullvad.net
     - https://doh.mullvad.net/dns-query
-    - tcp-tls:dot1.applied-privacy.net
-    - https://doh.applied-privacy.net/query
-    - tcp-tls:dns.digitale-gesellschaft.ch
-    - https://dns.digitale-gesellschaft.ch/dns-query
-    - tcp-tls:dns.digitalsize.net
-    - https://dns.digitalsize.net/dns-query
     
 bootstrapDns:
   - upstream: https://dns.quad9.net/dns-query
@@ -80,7 +62,7 @@ blocking:
       - https://raw.githubusercontent.com/m0zgen/dns-hole/master/whitelist.txt
       - https://raw.githubusercontent.com/ShadowWhisperer/BlockLists/master/Whitelists/Whitelist
       - https://raw.githubusercontent.com/m0zgen/bld-agregator/data/allowlist.txt
-     # - https://raw.githubusercontent.com/anudeepND/whitelist/master/domains/whitelist.txt
+      - https://raw.githubusercontent.com/anudeepND/whitelist/master/domains/whitelist.txt
      # - https://raw.githubusercontent.com/anudeepND/whitelist/master/domains/optional-list.txt
       - https://raw.githubusercontent.com/hagezi/dns-blocklists/main/whitelist.txt
      # - https://raw.githubusercontent.com/hagezi/dns-blocklists/main/whitelist-referral.txt
@@ -94,7 +76,7 @@ blocking:
   blockType: zeroIp
   # optional: TTL for answers to blocked domains
   # default: 6h
-  blockTTL: 2m
+  blockTTL: 5m
   # optional: automatically list refresh period (in duration format). Default: 4h.
   # Negative value -> deactivate automatically refresh.
   # 0 value -> use default
@@ -117,7 +99,7 @@ caching:
   # If 0, use TTL
   # If > 0, use this value, if TTL is greater
   # Default: 0
-  maxTime: 48h
+  maxTime: 72h
   # Max number of cache entries (responses) to be kept in cache (soft limit). Useful on systems with limited amount of RAM.
   # Default (0): unlimited
   maxItemsCount: 0
@@ -130,7 +112,7 @@ caching:
   prefetchExpires: 2h
   # name queries threshold for prefetch
   # default: 5
-  prefetchThreshold: 3
+  prefetchThreshold: 5
   # Max number of domains to be kept in cache for prefetching (soft limit). Useful on systems with limited amount of RAM.
   # Default (0): unlimited
   prefetchMaxItemsCount: 0
