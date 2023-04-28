@@ -89,6 +89,7 @@ blocking:
   downloadCooldown: 10s
   # optional: if failOnError, application startup will fail if at least one list can't be downloaded / opened. Default: blocking
   startStrategy: fast
+  maxErrorsPerFile: 500
 caching:
   # duration how long a response must be cached (min value).
   # If <=0, use response's TTL, if >0 use this value, if TTL is smaller
