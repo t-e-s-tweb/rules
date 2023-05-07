@@ -1,0 +1,35 @@
+{
+    "log": {
+      "level": "panic"
+    },
+    "dns": {
+      "servers": [
+        {
+          "address": "https://1.1.1.1/dns-query"
+        }
+      ],
+      "strategy": "prefer_ipv4",
+      "disable_cache": false
+    },
+    "inbounds": [
+      {
+        "type": "vmess",
+        "listen": "::",
+        "listen_port": 10000,
+        "users": [
+          {
+            "uuid": "ffffffff-ffff-ffff-ffff-ffffffffffff"
+          }
+        ],
+        "transport": {
+          "type": "ws",
+          "path": "/mmmm",
+		  "max_early_data": 2048,
+          "early_data_header_name": "Sec-WebSocket-Protocol"
+        }
+      }
+    ],
+    "outbounds": [
+      {"type": "direct"}
+    ]
+  }
