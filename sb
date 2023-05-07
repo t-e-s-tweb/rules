@@ -14,77 +14,36 @@
     "inbounds": [
       {
         "type": "vmess",
-        "tag": "vmess-wg",
         "listen": "::",
         "listen_port": 10000,
-        "sniff": true,
-        "sniff_override_destination": true,
         "users": [
           {
-            "uuid": "ad2c9acd-3afb-4fae-aff2-954c532020bd",
-            "alterId": 0
+            "uuid": "ffffffff-ffff-ffff-ffff-ffffffffffff"
           }
         ],
         "transport": {
           "type": "ws",
-          "path": "/wgvm",
-          "max_early_data": 2048,
+          "path": "/mmmm",
+		  "max_early_data": 2048,
           "early_data_header_name": "Sec-WebSocket-Protocol"
         }
       }
     ],
     "outbounds": [
       {
-        "type": "selector",
-        "tag": "Select",
-        "outbounds": [
-          "Direct",
-          "WARP"
-        ]
-      },
-      {
-        "type": "direct",
-        "tag": "Direct",
-        "domain_strategy": "prefer_ipv4"
-      },
-      {
         "type": "wireguard",
         "tag": "WARP",
-        "server": "162.159.192.10",
-        "server_port": 2408,
-        "local_address": ["172.16.0.2/32","2606:4700:110:8796:5bc0:a4d5:b516:1d54/128"],
+        "server": "162.159.195.204",
+        "server_port": 988,
+        "local_address": [
+          "172.16.0.2/32",
+          "2606:4700:110:8796:5bc0:a4d5:b516:1d54/128"
+        ],
         "private_key": "cLrrjgolyfbX8Lum78UcxsE9XnAFKt9xyxKhAXTcV2o=",
         "peer_public_key": "bmXOC+F1FxEMF9dyiK2H5/1SUtzH0JuVo51h2wPfgyo=",
         "mtu": 1280,
         "domain_strategy": "prefer_ipv6",
         "fallback_delay": "300ms"
       }
-    ],
-    "route": {
-      "rules": [
-        {
-          "inbound": ["vmess-wg", "trojan-wg"],
-          "outbound": "WARP",
-          "clash_mode": "rule"
-        },
-        {
-          "geosite": ["netflix","disney","openai","bing","imgur"],
-          "outbound": "WARP",
-          "clash_mode": "rule"
-        },
-        {
-          "outbound": "Direct",
-          "clash_mode": "direct"
-        }
-      ],
-      "final": "Select"
-    },
-    "experimental": {
-      "clash_api": {
-        "external_controller": "127.0.0.1:61804",
-        "secret": "PASSWORD",
-        "default_mode": "rule"
-      }
-    }
+    ]
   }
-  
