@@ -35,6 +35,7 @@
         "tag": "WARP",
         "server": "162.159.193.10",
         "server_port": 2408,
+	"system_interface": false,
         "local_address": [
           "172.16.0.2/32",
           "2606:4700:110:8796:5bc0:a4d5:b516:1d54/128"
