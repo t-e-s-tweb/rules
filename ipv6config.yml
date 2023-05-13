@@ -12,9 +12,6 @@ upstream:
     - tcp-tls:dns-unfiltered.adguard.com
     
 bootstrapDns:
-  - tcp+udp:2606:4700:4700::1111
-  - tcp+udp:2606:4700:4700::1001
-  - tcp+udp:2001:470:20::2
   - upstream: https://9.9.9.9/dns-query
   - upstream: https://dns.google/dns-query
     ips:
