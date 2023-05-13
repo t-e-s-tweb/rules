@@ -1,0 +1,80 @@
+upstream:
+  default:
+    - https://8.8.4.4/dns-query
+    - tcp-tls:8.8.8.8
+    - tcp-tls:9.9.9.9
+    - https://9.9.9.9/dns-query
+    - tcp-tls:1.1.1.1
+    - https://1.0.0.1/dns-query
+    - https://anycast.dns.nextdns.io
+    - tcp-tls:open.dns0.eu
+    - https://dns.dnswarden.com/uncensored
+    - tcp-tls:dns-unfiltered.adguard.com
+    
+bootstrapDns:
+  - tcp+udp: 2606:4700:4700::1111
+  - tcp+udp: 2606:4700:4700::1001
+  - tcp+udp: 2001:470:20::2
+  - upstream: https://9.9.9.9/dns-query
+  - upstream: https://dns.google/dns-query
+    ips:
+      - 8.8.8.8
+      - 2001:4860:4860::8888
+  - upstream: https://1.1.1.1/dns-query
+    ips:
+      - 1.1.1.1
+      - 2606:4700:4700::1111  
+  - upstream: https://9.9.9.9/dns-query
+    ips:
+      - 9.9.9.9
+      - 2620:fe::fe    
+connectIPVersion: dual
+
+blocking:
+  processingConcurrency: 1
+  blackLists:
+    ads:
+      - https://raw.githubusercontent.com/hagezi/dns-blocklists/main/domains/pro.txt
+      - https://nocdn.nrd-list.com/0/nrd-list-32-days.txt
+      - https://raw.githubusercontent.com/ShadowWhisperer/BlockLists/master/Lists/Scam
+      - https://raw.githubusercontent.com/ShadowWhisperer/BlockLists/master/Lists/Malware
+      - https://raw.githubusercontent.com/ShadowWhisperer/BlockLists/master/Lists/Cryptocurrency
+      - https://raw.githubusercontent.com/ShadowWhisperer/BlockLists/master/Lists/Typo
+      - https://raw.githubusercontent.com/ChathuraJW/my_pihole_addlists/main/addlists/complete_addlist_tick.txt
+      - https://raw.githubusercontent.com/m0zgen/dns-hole/master/malisious.txt
+  whiteLists:
+    ads:
+      - https://raw.githubusercontent.com/m0zgen/dns-hole/master/whitelist.txt
+      - https://raw.githubusercontent.com/ShadowWhisperer/BlockLists/master/Whitelists/Whitelist
+      - https://raw.githubusercontent.com/m0zgen/bld-agregator/data/allowlist.txt
+      - https://raw.githubusercontent.com/anudeepND/whitelist/master/domains/whitelist.txt
+      - https://raw.githubusercontent.com/hagezi/dns-blocklists/main/whitelist.txt
+      - https://raw.githubusercontent.com/KEINOS/BlockList/main/whitelist.txt
+  clientGroupsBlock:
+    default:
+      - ads
+  blockType: zeroIp
+  blockTTL: 5m
+  refreshPeriod: 12h
+  downloadTimeout: 15m
+  downloadAttempts: 2
+  downloadCooldown: 10s
+  startStrategy: fast
+  maxErrorsPerFile: 5
+caching:
+  minTime: 5m
+  maxTime: 72h
+  maxItemsCount: 0
+  prefetching: true
+  prefetchExpires: 2h
+  prefetchThreshold: 5
+  prefetchMaxItemsCount: 0
+  cacheTimeNegative: 30m
+  
+log:
+  level: warn
+  privacy: true
+
+ports:
+  dns: 3000
+  http: 8100
