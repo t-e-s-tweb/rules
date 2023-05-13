@@ -1,11 +1,11 @@
 upstream:
   default:
-    - https://8.8.4.4/dns-query
-    - tcp-tls:8.8.8.8
-    - tcp-tls:9.9.9.9
-    - https://9.9.9.9/dns-query
-    - tcp-tls:1.1.1.1
-    - https://1.0.0.1/dns-query
+    - https://dns.google/dns-query
+    - tcp-tls:dns.google
+    - tcp-tls:dns9.quad9.net
+    - https://dns9.quad9.net/dns-query
+    - tcp-tls:security.cloudflare-dns.com
+    - https://security.cloudflare-dns.com/dns-query
     - https://anycast.dns.nextdns.io
     - tcp-tls:open.dns0.eu
     - https://dns.dnswarden.com/uncensored
@@ -17,11 +17,11 @@ bootstrapDns:
     ips:
       - 8.8.8.8
       - 2001:4860:4860::8888
-  - upstream: https://1.1.1.1/dns-query
+  - upstream: https://cloudflare-dns.com/dns-query
     ips:
       - 1.1.1.1
       - 2606:4700:4700::1111  
-  - upstream: https://9.9.9.9/dns-query
+  - upstream: https://dns9.quad9.net/dns-query
     ips:
       - 9.9.9.9
       - 2620:fe::fe    
