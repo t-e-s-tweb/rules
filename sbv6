@@ -1,0 +1,50 @@
+{
+    "log": {
+      "level": "panic"
+    },
+    "dns": {
+      "servers": [
+        {
+          "address": "https://1.1.1.1/dns-query"
+        }
+      ],
+      "strategy": "prefer_ipv6",
+      "disable_cache": false
+    },
+    "inbounds": [
+      {
+        "type": "vmess",
+        "listen": "::",
+        "listen_port": 10000,
+        "users": [
+          {
+            "uuid": "ffffffff-ffff-ffff-ffff-ffffffffffff"
+          }
+        ],
+        "transport": {
+          "type": "ws",
+          "path": "/mmmm",
+		  "max_early_data": 2048,
+          "early_data_header_name": "Sec-WebSocket-Protocol"
+        }
+      }
+    ],
+    "outbounds": [
+      {
+        "type": "wireguard",
+        "tag": "WARP",
+        "server": "2606:4700:d1::966:c33a:4941:d37a",
+        "server_port": 894,
+	"system_interface": false,
+        "local_address": [
+          "172.16.0.2/32",
+          "2606:4700:110:8796:5bc0:a4d5:b516:1d54/128"
+        ],
+        "private_key": "cLrrjgolyfbX8Lum78UcxsE9XnAFKt9xyxKhAXTcV2o=",
+        "peer_public_key": "bmXOC+F1FxEMF9dyiK2H5/1SUtzH0JuVo51h2wPfgyo=",
+        "mtu": 1280,
+        "domain_strategy": "prefer_ipv6",
+        "fallback_delay": "500ms"
+      }
+    ]
+  }
