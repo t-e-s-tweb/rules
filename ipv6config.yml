@@ -25,7 +25,7 @@ bootstrapDns:
     ips:
       - 9.9.9.9
       - 2620:fe::fe    
-connectIPVersion: dual
+connectIPVersion: v6
 
 blocking:
   processingConcurrency: 1
