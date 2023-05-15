@@ -28,58 +28,7 @@ bootstrapDns:
       - 1.0.0.1  
 connectIPVersion: v4
 
-# optional: use black and white lists to block queries (for example ads, trackers, adult pages etc.)
-blocking:
-  processingConcurrency: 1
-  # definition of blacklist groups. Can be external link (http/https) or local file
-  blackLists:
-    ads:
-      - https://raw.githubusercontent.com/hagezi/dns-blocklists/main/domains/pro.txt
-      - https://raw.githubusercontent.com/hagezi/dns-blocklists/main/hosts/fake.txt
-      - https://raw.githubusercontent.com/hagezi/dns-blocklists/main/hosts/tif.txt
-      - https://raw.githubusercontent.com/hagezi/dns-blocklists/main/hosts/personal.txt
-      - https://nocdn.nrd-list.com/0/nrd-list-32-days.txt
-      - https://raw.githubusercontent.com/ShadowWhisperer/BlockLists/master/Lists/Scam
-      - https://raw.githubusercontent.com/ShadowWhisperer/BlockLists/master/Lists/Malware
-      - https://raw.githubusercontent.com/ShadowWhisperer/BlockLists/master/Lists/Cryptocurrency
-      - https://raw.githubusercontent.com/ShadowWhisperer/BlockLists/master/Lists/Typo
-      - https://raw.githubusercontent.com/ChathuraJW/my_pihole_addlists/main/addlists/complete_addlist_tick.txt
-    #  - https://raw.githubusercontent.com/m0zgen/dns-hole/master/dns-blacklist.txt
-      - https://raw.githubusercontent.com/m0zgen/dns-hole/master/malisious.txt
-# definition of whitelist groups. Attention: if the same group has black and whitelists, whitelists will be used to disable particular blacklist entries. If a group has only whitelist entries -> this means only domains from this list are allowed, all other domains will be blocked
-  whiteLists:
-    ads:
-      - https://raw.githubusercontent.com/m0zgen/dns-hole/master/whitelist.txt
-      - https://raw.githubusercontent.com/ShadowWhisperer/BlockLists/master/Whitelists/Whitelist
-      - https://raw.githubusercontent.com/m0zgen/bld-agregator/data/allowlist.txt
-      - https://raw.githubusercontent.com/anudeepND/whitelist/master/domains/whitelist.txt
-     # - https://raw.githubusercontent.com/anudeepND/whitelist/master/domains/optional-list.txt
-      - https://raw.githubusercontent.com/hagezi/dns-blocklists/main/whitelist.txt
-     # - https://raw.githubusercontent.com/hagezi/dns-blocklists/main/whitelist-referral.txt
-      - https://raw.githubusercontent.com/KEINOS/BlockList/main/whitelist.txt
-     # - https://raw.githubusercontent.com/PeterDaveHello/url-shorteners/master/list
-  # definition: which groups should be applied for which client
-  clientGroupsBlock:
-    # default will be used, if no special definition for a client name exists
-    default:
-      - ads
-  blockType: zeroIp
-  # optional: TTL for answers to blocked domains
-  # default: 6h
-  blockTTL: 5m
-  # optional: automatically list refresh period (in duration format). Default: 4h.
-  # Negative value -> deactivate automatically refresh.
-  # 0 value -> use default
-  refreshPeriod: 4h
-  # optional: timeout for list download (each url). Default: 60s. Use large values for big lists or slow internet connections
-  downloadTimeout: 15m
-  # optional: Download attempt timeout. Default: 60s
-  downloadAttempts: 5
-  # optional: Time between the download attempts. Default: 1s
-  downloadCooldown: 10s
-  # optional: if failOnError, application startup will fail if at least one list can't be downloaded / opened. Default: blocking
-  startStrategy: fast
-  maxErrorsPerFile: 500
+
 caching:
   # duration how long a response must be cached (min value).
   # If <=0, use response's TTL, if >0 use this value, if TTL is smaller
