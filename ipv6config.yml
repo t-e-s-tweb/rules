@@ -28,7 +28,7 @@ bootstrapDns:
 connectIPVersion: v6
 
 blocking:
-  processingConcurrency: 1
+  processingConcurrency: 5
   blackLists:
     ads:
       - https://raw.githubusercontent.com/hagezi/dns-blocklists/main/domains/pro.txt
