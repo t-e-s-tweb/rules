@@ -46,7 +46,7 @@
       {
         "type": "wireguard",
         "tag": "WARP",
-        "server": "162.159.193.10",
+        "server": "engage.cloudflareclient.com",
         "server_port": 2408,
 	"system_interface": false,
         "local_address": [
