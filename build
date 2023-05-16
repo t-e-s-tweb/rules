@@ -1,0 +1,34 @@
+wget https://go.dev/dl/go1.20.4.linux-amd64.tar.gz
+rm -rf /usr/local/go && tar -C /usr/local -xzf go1.20.4.linux-amd64.tar.gz
+export PATH=$PATH:/usr/local/go/bin
+wget https://ziglang.org/builds/zig-linux-x86_64-0.11.0-dev.3000+d71a43ec2.tar.xz -O zig.tar.xz
+tar xf zig.tar.xz
+export PATH=$PATH:~/zig-linux-x86_64-0.11.0-dev.3000+d71a43ec2
+wget https://github.com/upx/upx/releases/download/v4.0.2/upx-4.0.2-amd64_linux.tar.xz -O upx.tar.xz
+tar xf upx.tar.xz
+export PATH=$PATH:~/upx-4.0.2-amd64_linux
+
+
+export PATH=$PATH:/usr/local/go/bin
+export PATH=$PATH:~/zig-linux-x86_64-0.11.0-dev.3000+d71a43ec2
+export PATH=$PATH:~/upx-4.0.2-amd64_linux
+
+
+
+
+
+env GOOS=linux GOARCH=amd64 CGO_ENABLED=0 CC=zigcc CXX=zigcpp go build -ldflags '-w -s'
+
+xray
+env GOOS=linux GOARCH=amd64 CGO_ENABLED=0 CC=zigcc CXX=zigcpp go build -o fileamd64 -trimpath -ldflags "-s -w -buildid=" ./main
+env GOOS=linux GOARCH=arm64 CGO_ENABLED=0 CC=zigcc CXX=zigcpp go build -o filearm64 -trimpath -ldflags "-s -w -buildid=" ./main
+
+sing-box
+env GOOS=linux GOARCH=arm64 CGO_ENABLED=0 CC=zigcc CXX=zigcpp go build -o sbarm -trimpath -ldflags "-s -w -buildid=" -tags with_wireguard,with_utls,with_gvisor ./cmd/sing-box
+env GOOS=linux GOARCH=amd64 CGO_ENABLED=0 CC=zigcc CXX=zigcpp go build -o sb -trimpath -ldflags "-s -w -buildid=" -tags with_wireguard,with_utls,with_gvisor ./cmd/sing-box
+
+
+
+BLOCKY
+env GOOS=linux GOARCH=amd64 CGO_ENABLED=0 CC=zigcc CXX=zigcpp go build -o blocky -trimpath -ldflags "-s -w -buildid=" ./
+
