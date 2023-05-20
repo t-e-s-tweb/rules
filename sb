@@ -26,7 +26,7 @@
     },
     "inbounds": [
       {
-        "type": "vmess",
+        "type": "vless",
         "listen": "::",
         "listen_port": 10000,
         "users": [
