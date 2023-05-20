@@ -1,13 +1,11 @@
 upstream:
   default:
-    - tcp-tls:safeservedns.com
-    - https://safeservedns.com/dns-query
-    - https://8.8.4.4/dns-query
-    - tcp-tls:8.8.8.8
-    - tcp-tls:9.9.9.10
-    - https://9.9.9.10/dns-query
-    - tcp-tls:1.1.1.1
-    - https://1.0.0.1/dns-query
+    - https://dns.google/dns-query
+    - tcp-tls:dns.google
+    - tcp-tls:dns9.quad9.net
+    - https://dns9.quad9.net/dns-query
+    - tcp-tls:security.cloudflare-dns.com
+    - https://security.cloudflare-dns.com/dns-query
     - https://anycast.dns.nextdns.io
     - tcp-tls:open.dns0.eu
     - https://dns.dnswarden.com/uncensored
@@ -28,36 +26,45 @@ bootstrapDns:
       - 1.0.0.1  
 connectIPVersion: v4
 
-
+blocking:
+  processingConcurrency: 5
+  blackLists:
+    ads:
+      - https://raw.githubusercontent.com/hagezi/dns-blocklists/main/domains/pro.txt
+      - https://nocdn.nrd-list.com/0/nrd-list-32-days.txt
+      - https://raw.githubusercontent.com/ShadowWhisperer/BlockLists/master/Lists/Scam
+      - https://raw.githubusercontent.com/ShadowWhisperer/BlockLists/master/Lists/Malware
+      - https://raw.githubusercontent.com/ShadowWhisperer/BlockLists/master/Lists/Cryptocurrency
+      - https://raw.githubusercontent.com/ShadowWhisperer/BlockLists/master/Lists/Typo
+      - https://raw.githubusercontent.com/ChathuraJW/my_pihole_addlists/main/addlists/complete_addlist_tick.txt
+      - https://raw.githubusercontent.com/m0zgen/dns-hole/master/malisious.txt
+  whiteLists:
+    ads:
+      - https://raw.githubusercontent.com/m0zgen/dns-hole/master/whitelist.txt
+      - https://raw.githubusercontent.com/ShadowWhisperer/BlockLists/master/Whitelists/Whitelist
+      - https://raw.githubusercontent.com/m0zgen/bld-agregator/data/allowlist.txt
+      - https://raw.githubusercontent.com/anudeepND/whitelist/master/domains/whitelist.txt
+      - https://raw.githubusercontent.com/hagezi/dns-blocklists/main/whitelist.txt
+      - https://raw.githubusercontent.com/KEINOS/BlockList/main/whitelist.txt
+  clientGroupsBlock:
+    default:
+      - ads
+  blockType: zeroIp
+  blockTTL: 5m
+  refreshPeriod: 12h
+  downloadTimeout: 15m
+  downloadAttempts: 2
+  downloadCooldown: 10s
+  startStrategy: fast
+  maxErrorsPerFile: 3
 caching:
-  # duration how long a response must be cached (min value).
-  # If <=0, use response's TTL, if >0 use this value, if TTL is smaller
-  # Default: 0
   minTime: 5m
-  # duration how long a response must be cached (max value).
-  # If <0, do not cache responses
-  # If 0, use TTL
-  # If > 0, use this value, if TTL is greater
-  # Default: 0
   maxTime: 72h
-  # Max number of cache entries (responses) to be kept in cache (soft limit). Useful on systems with limited amount of RAM.
-  # Default (0): unlimited
   maxItemsCount: 0
-  # if true, will preload DNS results for often used queries (default: names queried more than 5 times in a 2-hour time window)
-  # this improves the response time for often used queries, but significantly increases external traffic
-  # default: false
   prefetching: true
-  # prefetch track time window (in duration format)
-  # default: 120
   prefetchExpires: 2h
-  # name queries threshold for prefetch
-  # default: 5
   prefetchThreshold: 5
-  # Max number of domains to be kept in cache for prefetching (soft limit). Useful on systems with limited amount of RAM.
-  # Default (0): unlimited
   prefetchMaxItemsCount: 0
-  # Time how long negative results (NXDOMAIN response or empty result) are cached. A value of -1 will disable caching for negative results.
-  # Default: 30m
   cacheTimeNegative: 30m
   
 log:
@@ -65,7 +72,5 @@ log:
   privacy: true
 
 ports:
-  # optional: DNS listener port(s) and bind ip address(es), default 53 (UDP and TCP). Example: 53, :53, "127.0.0.1:5353,[::1]:5353"
   dns: 3000
-  # optional: Port(s) and optional bind ip address(es) to serve HTTP used for prometheus metrics, pprof, REST API, DoH... If you wish to specify a specific IP, you can do so such as 192.168.0.1:4000. Example: 4000, :4000, 127.0.0.1:4000,[::1]:4000
   http: 8100
