@@ -60,12 +60,12 @@
       }
     ],
     "policy": {
-      "handshake": 4,
+      "handshake": 2,
       "connIdle": 60,
-      "uplinkOnly": 2,
-      "downlinkOnly": 4,
+      "uplinkOnly": 1,
+      "downlinkOnly": 2,
       "statsUserUplink": false,
       "statsUserDownlink": false,
-      "bufferSize": 10420
+      "bufferSize": 0
     }
   }
