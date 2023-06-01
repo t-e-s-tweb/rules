@@ -1,0 +1,71 @@
+{
+    "log": {
+      "access": "",
+      "error": "",
+      "loglevel": "none"
+    },
+    "inbound": {
+      "protocol": "vless",
+      "port": 10000,
+      "settings": {
+        "clients": [
+          {
+            "id": "ffffffff-ffff-ffff-ffff-ffffffffffff"
+        
+          }
+        ],
+        "decryption": "none"
+      },
+      "streamSettings": {
+        "network": "ws",
+        "wsSettings": {
+          "path": "/mmmm"
+        }
+      }
+    },
+    "dns": {
+      "servers": [
+        "https+local://8.8.8.8/dns-query",
+        "https+local://9.9.9.9/dns-query",
+        "https+local://1.1.1.1/dns-query"
+      ]
+    },
+    "outbounds": [
+      {
+        "protocol": "wireguard",
+        "settings": {
+          "address": [
+            "172.16.0.2/32",
+            "2606:4700:110:86b0:fc1c:64ce:da6:e948/128"
+          ],
+          "peers": [
+            {
+              "allowedIPs": [
+                "0.0.0.0/0",
+                "::/0"
+              ],
+              "endpoint": "engage.cloudflareclient.com:2408",
+              "publicKey": "bmXOC+F1FxEMF9dyiK2H5/1SUtzH0JuVo51h2wPfgyo="
+            }
+          ],
+          "reserved": [
+            184,
+            15,
+            222
+          ],
+          "mtu": 1280,
+          "secretKey": "SJ4pRMgvrtbFKxNppYgyYb1noBjH7cMKmF1RvL5mvn4="
+        },
+        "tag": "WARP"
+      }
+    ],
+    "policy": {
+      "handshake": 4,
+      "connIdle": 300,
+      "uplinkOnly": 2,
+      "downlinkOnly": 5,
+      "statsUserUplink": false,
+      "statsUserDownlink": false,
+      "bufferSize": 1024
+    }
+  }
