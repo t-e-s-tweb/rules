@@ -61,11 +61,11 @@
     ],
     "policy": {
       "handshake": 4,
-      "connIdle": 300,
+      "connIdle": 60,
       "uplinkOnly": 2,
-      "downlinkOnly": 5,
+      "downlinkOnly": 4,
       "statsUserUplink": false,
       "statsUserDownlink": false,
-      "bufferSize": 1024
+      "bufferSize": 10420
     }
   }
