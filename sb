@@ -55,11 +55,11 @@
 	"system_interface": false,
         "local_address": [
           "172.16.0.2/32",
-          "2606:4700:110:8d89:94dd:d426:4bca:ea7e/128"
+          "2606:4700:110:87ec:a045:be2c:a16d:f719/128"
         ],
-        "private_key": "KDT6Z3lPhjxM35etkhc4kJYQ7/x6RJp7dE+zmo13JGI=",
+        "private_key": "sPVXO3YW3+j6/NxXqrk6/HKdrBZ6ioYGPXYO+h/SfHw=",
         "peer_public_key": "bmXOC+F1FxEMF9dyiK2H5/1SUtzH0JuVo51h2wPfgyo=",
-        "reserved":[ 140, 215, 60 ],
+        "reserved":[ 128, 140, 46 ],
         "mtu": 1280,
         "domain_strategy": "prefer_ipv6",
         "fallback_delay": "600ms"
