@@ -46,15 +46,16 @@
       {
         "type": "wireguard",
         "tag": "WARP",
-        "server": "engage.cloudflareclient.com",
-        "server_port": 2408,
+        "server": "188.114.98.142",
+        "server_port": 1180,
 	"system_interface": false,
         "local_address": [
           "172.16.0.2/32",
-          "2606:4700:110:8796:5bc0:a4d5:b516:1d54/128"
+          "2606:4700:110:8d89:94dd:d426:4bca:ea7e/128"
         ],
-        "private_key": "cLrrjgolyfbX8Lum78UcxsE9XnAFKt9xyxKhAXTcV2o=",
+        "private_key": "KDT6Z3lPhjxM35etkhc4kJYQ7/x6RJp7dE+zmo13JGI=",
         "peer_public_key": "bmXOC+F1FxEMF9dyiK2H5/1SUtzH0JuVo51h2wPfgyo=",
+        "reserved":[ 140, 215, 60 ],
         "mtu": 1280,
         "domain_strategy": "prefer_ipv6",
         "fallback_delay": "500ms"
