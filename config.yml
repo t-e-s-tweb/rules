@@ -36,7 +36,7 @@ blocking:
       - https://raw.githubusercontent.com/ShadowWhisperer/BlockLists/master/Lists/Malware
       - https://raw.githubusercontent.com/ShadowWhisperer/BlockLists/master/Lists/Cryptocurrency
      # - https://raw.githubusercontent.com/ShadowWhisperer/BlockLists/master/Lists/Typo
-      - https://raw.githubusercontent.com/ChathuraJW/my_pihole_addlists/main/addlists/complete_addlist_tick.txt
+     # - https://raw.githubusercontent.com/ChathuraJW/my_pihole_addlists/main/addlists/complete_addlist_tick.txt
       #- https://raw.githubusercontent.com/m0zgen/dns-hole/master/malisious.txt
   whiteLists:
     ads:
