@@ -56,7 +56,7 @@ blocking:
   downloadAttempts: 2
   downloadCooldown: 10s
   startStrategy: fast
-  maxErrorsPerFile: 3
+  maxErrorsPerFile: 300000
 caching:
   minTime: 5m
   maxTime: 72h
