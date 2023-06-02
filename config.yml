@@ -27,25 +27,25 @@ bootstrapDns:
 connectIPVersion: v4
 
 blocking:
-  processingConcurrency: 5
+  processingConcurrency: 1
   blackLists:
     ads:
       - https://raw.githubusercontent.com/hagezi/dns-blocklists/main/domains/pro.txt
-      - https://nocdn.nrd-list.com/0/nrd-list-32-days.txt
+     # - https://nocdn.nrd-list.com/0/nrd-list-32-days.txt
       - https://raw.githubusercontent.com/ShadowWhisperer/BlockLists/master/Lists/Scam
       - https://raw.githubusercontent.com/ShadowWhisperer/BlockLists/master/Lists/Malware
       - https://raw.githubusercontent.com/ShadowWhisperer/BlockLists/master/Lists/Cryptocurrency
-      - https://raw.githubusercontent.com/ShadowWhisperer/BlockLists/master/Lists/Typo
+     # - https://raw.githubusercontent.com/ShadowWhisperer/BlockLists/master/Lists/Typo
       - https://raw.githubusercontent.com/ChathuraJW/my_pihole_addlists/main/addlists/complete_addlist_tick.txt
-      - https://raw.githubusercontent.com/m0zgen/dns-hole/master/malisious.txt
+      #- https://raw.githubusercontent.com/m0zgen/dns-hole/master/malisious.txt
   whiteLists:
     ads:
-      - https://raw.githubusercontent.com/m0zgen/dns-hole/master/whitelist.txt
-      - https://raw.githubusercontent.com/ShadowWhisperer/BlockLists/master/Whitelists/Whitelist
-      - https://raw.githubusercontent.com/m0zgen/bld-agregator/data/allowlist.txt
-      - https://raw.githubusercontent.com/anudeepND/whitelist/master/domains/whitelist.txt
-      - https://raw.githubusercontent.com/hagezi/dns-blocklists/main/whitelist.txt
-      - https://raw.githubusercontent.com/KEINOS/BlockList/main/whitelist.txt
+     # - https://raw.githubusercontent.com/m0zgen/dns-hole/master/whitelist.txt
+     # - https://raw.githubusercontent.com/ShadowWhisperer/BlockLists/master/Whitelists/Whitelist
+     # - https://raw.githubusercontent.com/m0zgen/bld-agregator/data/allowlist.txt
+     # - https://raw.githubusercontent.com/anudeepND/whitelist/master/domains/whitelist.txt
+     # - https://raw.githubusercontent.com/hagezi/dns-blocklists/main/whitelist.txt
+     # - https://raw.githubusercontent.com/KEINOS/BlockList/main/whitelist.txt
   clientGroupsBlock:
     default:
       - ads
