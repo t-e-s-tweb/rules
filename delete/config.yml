@@ -1,0 +1,28 @@
+upstream:
+  default:
+    - 127.0.0.1:5353
+
+    
+bootstrapDns:
+  - upstream: https://dns.quad9.net/dns-query
+    ips:
+      - 9.9.9.9
+      - 149.112.112.112
+  - upstream: https://dns.google/dns-query
+    ips:
+      - 8.8.8.8
+      - 8.8.4.4
+  - upstream: https://1.1.1.1/dns-query
+    ips:
+      - 1.1.1.1
+      - 1.0.0.1  
+connectIPVersion: v4
+
+  
+log:
+  level: info
+  privacy: false
+
+ports:
+  dns: 3000
+  http: 8100
