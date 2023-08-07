@@ -15,21 +15,9 @@ upstream:
     - https://1.0.0.1/dns-query
     - https://cloudflare-dns.com/dns-query
     - https://mozilla.cloudflare-dns.com/dns-query
-    - tcp-tls:dns.nextdns.io
-    - https://dns.nextdns.io
-    - tcp-tls:anycast.dns.nextdns.io
-    - https://anycast.dns.nextdns.io
-    - https://firefox.dns.nextdns.io
     - tcp-tls:open.dns0.eu
     - https://open.dns0.eu/dns-query
     - https://dns.dnswarden.com/uncensored
-    - tcp-tls:dns-unfiltered.adguard.com
-    - tcp-tls:dot1.applied-privacy.net
-    - https://doh.applied-privacy.net/query
-    - tcp-tls:dns.digitale-gesellschaft.ch
-    - https://dns.digitale-gesellschaft.ch/dns-query
-    - tcp-tls:dns.digitalsize.net
-    - https://dns.digitalsize.net/dns-query
     - tcp-tls:ordns.he.net
     - https://ordns.he.net/dns-query
     
@@ -71,21 +59,21 @@ blocking:
     default:
       - ads
   blockType: zeroIp
-  blockTTL: 30m
-  refreshPeriod: 12h
-  downloadTimeout: 15m
+  blockTTL: 10m
+  refreshPeriod: 24h
+  downloadTimeout: 5m
   downloadAttempts: 2
   downloadCooldown: 10s
   startStrategy: fast
-  maxErrorsPerFile: 1000
+  maxErrorsPerFile: 500
 caching:
   minTime: 5m
   maxTime: 72h
-  maxItemsCount: 0
+  maxItemsCount: 10000
   prefetching: true
-  prefetchExpires: 1h
+  prefetchExpires: 4h
   prefetchThreshold: 5
-  prefetchMaxItemsCount: 0
+  prefetchMaxItemsCount: 2000
   cacheTimeNegative: 30m
   
 log:
