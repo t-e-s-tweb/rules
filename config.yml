@@ -31,7 +31,7 @@ connectIPVersion: v4
 blocking:
   blackLists:
     ads:
-      - https://raw.githubusercontent.com/hagezi/dns-blocklists/main/domains/pro.txt
+      - https://raw.githubusercontent.com/hagezi/dns-blocklists/main/domains/pro.plus.txt
       - https://raw.githubusercontent.com/ShadowWhisperer/BlockLists/master/RAW/Scam
       - https://raw.githubusercontent.com/ShadowWhisperer/BlockLists/master/RAW/Malware
       - https://raw.githubusercontent.com/ShadowWhisperer/BlockLists/master/RAW/Cryptocurrency
