@@ -13,15 +13,15 @@
           "address_resolver": "dns-local"
         },      
         {
-          "address": "https://cloudflare-dns.com/dns-query",
+          "address": "https://1.1.1.1/dns-query",
           "address_resolver": "dns-local"
         },
         {
-          "address": "https://dns.google/dns-query",
+          "address": "https://8.8.8.8/dns-query",
           "address_resolver": "dns-local"
         },
 	{
-          "address": "1.1.1.1",
+          "address": "local",
           "tag": "dns-local"
         }
       ],
