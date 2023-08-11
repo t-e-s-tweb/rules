@@ -33,8 +33,6 @@
         "type": "vless",
         "listen": "::",
         "listen_port": 10000,
-        "sniff": true,
-        "sniff_override_destination": true,
         "users": [
           {
             "uuid": "ffffffff-ffff-ffff-ffff-ffffffffffff"
