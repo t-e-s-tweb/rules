@@ -64,7 +64,7 @@
         "reserved":[ 64, 177, 137 ],
         "mtu": 1280,
         "domain_strategy": "prefer_ipv6",
-        "fallback_delay": "150ms"
+        "fallback_delay": "350ms"
       }
     ]
   }
