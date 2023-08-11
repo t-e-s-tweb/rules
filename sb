@@ -21,7 +21,7 @@
           "address_resolver": "dns-local"
         },
 	{
-          "address": "local",
+          "address": "8.8.8.8",
           "tag": "dns-local"
         }
       ],
