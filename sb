@@ -7,41 +7,58 @@
             {
                 "address": "h3://cloudflare-dns.com/dns-query",
                 "address_resolver": "dns-local",
-                "address_strategy": "prefer_ipv4",
+                "address_strategy": "prefer_ipv6",
                 "strategy": "prefer_ipv4",
                 "detour": "WARP"
             },
             {
-                "address": "h3://dns.google/dns-query",
+                "address": "tls://dns.google",
                 "address_resolver": "dns-local",
-                "address_strategy": "prefer_ipv4",
+                "address_strategy": "prefer_ipv6",
                 "strategy": "prefer_ipv4",
                 "detour": "WARP"
             },
             {
                 "address": "https://1.1.1.1/dns-query",
                 "address_resolver": "dns-local",
-                "address_strategy": "prefer_ipv4",
+                "address_strategy": "prefer_ipv6",
                 "strategy": "prefer_ipv4",
                 "detour": "WARP"
             },
             {
                 "address": "https://8.8.8.8/dns-query",
                 "address_resolver": "dns-local",
-                "address_strategy": "prefer_ipv4",
+                "address_strategy": "prefer_ipv6",
                 "strategy": "prefer_ipv4",
                 "tag": "gdns",
                 "detour": "WARP"
             },
             {
-                "address": "udp://8.8.8.8",
+                "address": "8.8.8.8",
+                "tag": "dns-local",
                 "address_strategy": "prefer_ipv4",
                 "strategy": "prefer_ipv4",
-                "tag": "dns-local",
                 "detour": "direct"
             }
         ],
-        "strategy": "prefer_ipv4",
+        "rules": [
+            {
+                "outbound": "gdns",
+                "server": "gdns",
+                "rewrite_ttl": 600
+            },
+            {
+                "outbound": "direct",
+                "server": "dns-local",
+                "rewrite_ttl": 600
+            },
+            {
+                "outbound": "any",
+                "server": "gdns",
+                "rewrite_ttl": 600
+            }
+        ],
+        "strategy": "prefer_ipv6",
         "final": "gdns",
         "disable_cache": false
     },
@@ -65,6 +82,10 @@
     ],
     "outbounds": [
         {
+            "type": "dns",
+            "tag": "dns-out"
+        },
+        {
             "type": "wireguard",
             "tag": "WARP",
             "server": "188.114.96.12",
@@ -76,24 +97,32 @@
             ],
             "private_key": "iNuaRwd1caTHA8GjgHOkexd8U1rOKyJ3oIqLW7qe7k0=",
             "peer_public_key": "bmXOC+F1FxEMF9dyiK2H5/1SUtzH0JuVo51h2wPfgyo=",
-            "reserved": [241, 249, 137],
+            "reserved": [
+                241,
+                249,
+                137
+            ],
             "mtu": 1280,
             "domain_strategy": "prefer_ipv6",
-            "fallback_delay": "1000ms"
+            "fallback_delay": "300ms"
         },
         {
             "type": "direct",
             "tag": "direct"
-        },
-        {
-            "type": "dns",
-            "tag": "dns-out"
         }
     ],
     "route": {
         "auto_detect_interface": false,
         "final": "WARP",
         "rules": [
+            {
+                "port": 53,
+                "outbound": "dns-out"
+            },
+            {
+                "port": 853,
+                "outbound": "dns-out"
+            },
             {
                 "protocol": "dns",
                 "outbound": "dns-out"
