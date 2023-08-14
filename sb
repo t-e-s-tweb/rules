@@ -7,26 +7,36 @@
             {
                 "address": "h3://cloudflare-dns.com/dns-query",
                 "address_resolver": "dns-local",
+                "address_strategy": "prefer_ipv4",
+                "strategy": "prefer_ipv4",
                 "detour": "WARP"
             },
             {
                 "address": "h3://dns.google/dns-query",
                 "address_resolver": "dns-local",
+                "address_strategy": "prefer_ipv4",
+                "strategy": "prefer_ipv4",
                 "detour": "WARP"
             },
             {
                 "address": "https://1.1.1.1/dns-query",
                 "address_resolver": "dns-local",
+                "address_strategy": "prefer_ipv4",
+                "strategy": "prefer_ipv4",
                 "detour": "WARP"
             },
             {
                 "address": "https://8.8.8.8/dns-query",
                 "address_resolver": "dns-local",
+                "address_strategy": "prefer_ipv4",
+                "strategy": "prefer_ipv4",
                 "tag": "gdns",
                 "detour": "WARP"
             },
             {
                 "address": "udp://8.8.8.8",
+                "address_strategy": "prefer_ipv4",
+                "strategy": "prefer_ipv4",
                 "tag": "dns-local",
                 "detour": "direct"
             }
