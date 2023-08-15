@@ -1,128 +1,131 @@
 {
-    "log": {
-        "level": "panic"
-    },
-    "dns": {
-        "servers": [
-            {
-                "address": "h3://cloudflare-dns.com/dns-query",
-                "address_resolver": "dns-local",
-                "address_strategy": "prefer_ipv6",
-                "strategy": "prefer_ipv4",
-                "detour": "WARP"
-            },
-            {
-                "address": "tls://dns.google",
-                "address_resolver": "dns-local",
-                "address_strategy": "prefer_ipv6",
-                "strategy": "prefer_ipv4",
-                "detour": "WARP"
-            },
-            {
-                "address": "https://1.1.1.1/dns-query",
-                "address_resolver": "dns-local",
-                "address_strategy": "prefer_ipv6",
-                "strategy": "prefer_ipv4",
-                "detour": "WARP"
-            },
-            {
-                "address": "https://8.8.8.8/dns-query",
-                "address_resolver": "dns-local",
-                "address_strategy": "prefer_ipv6",
-                "strategy": "prefer_ipv4",
-                "tag": "gdns",
-                "detour": "WARP"
-            },
-            {
-                "address": "8.8.8.8",
-                "tag": "dns-local",
-                "address_strategy": "prefer_ipv4",
-                "strategy": "prefer_ipv4",
-                "detour": "direct"
-            }
-        ],
-        "rules": [
-            {
-                "outbound": "gdns",
-                "server": "gdns",
-                "rewrite_ttl": 600
-            },
-            {
-                "outbound": "direct",
-                "server": "dns-local",
-                "rewrite_ttl": 600
-            },
-            {
-                "outbound": "any",
-                "server": "gdns",
-                "rewrite_ttl": 600
-            }
-        ],
-        "strategy": "prefer_ipv6",
-        "final": "gdns",
-        "disable_cache": false
-    },
-    "inbounds": [
-        {
-            "type": "vless",
-            "listen": "::",
-            "listen_port": 10000,
-            "users": [
-                {
-                    "uuid": "ffffffff-ffff-ffff-ffff-ffffffffffff"
-                }
-            ],
-            "transport": {
-                "type": "ws",
-                "path": "/mmmm",
-                "max_early_data": 2048,
-                "early_data_header_name": "Sec-WebSocket-Protocol"
-            }
-        }
+  "log": {
+    "level": "panic"
+  },
+  "dns": {
+    "servers": [
+      {
+        "tag": "cfh",
+        "address": "h3://cloudflare-dns.com/dns-query",
+        "address_resolver": "dns-local",
+        "address_strategy": "prefer_ipv6",
+        "strategy": "prefer_ipv4",
+        "detour": "direct"
+      },
+      {
+        "tag": "tls",
+        "address": "tls://dns.google",
+        "address_resolver": "dns-local",
+        "address_strategy": "prefer_ipv6",
+        "strategy": "prefer_ipv4",
+        "detour": "direct"
+      },
+      {
+        "tag": "cf",
+        "address": "https://1.1.1.1/dns-query",
+        "address_resolver": "dns-local",
+        "address_strategy": "prefer_ipv6",
+        "strategy": "prefer_ipv4",
+        "detour": "direct"
+      },
+      {
+        "tag": "gdns",
+        "address": "https://8.8.8.8/dns-query",
+        "address_resolver": "dns-local",
+        "address_strategy": "prefer_ipv6",
+        "strategy": "prefer_ipv4",
+        "detour": "direct"
+      },
+      {
+        "tag": "dns-local",
+        "address": "8.8.8.8",
+        "address_strategy": "prefer_ipv4",
+        "strategy": "prefer_ipv4",
+        "detour": "direct"
+      }
     ],
-    "outbounds": [
-        {
-            "type": "dns",
-            "tag": "dns-out"
-        },
-        {
-            "type": "wireguard",
-            "tag": "WARP",
-            "server": "188.114.96.12",
-            "server_port": 878,
-            "system_interface": false,
-            "local_address": [
-                "172.16.0.2/32",
-                "2606:4700:110:8626:fd45:29e9:8b6b:3377/128"
-            ],
-            "private_key": "CA+fHUAME3ZC53jMj++Z5bSTBfuEXbP20EqaPuYHtXI=",
-            "peer_public_key": "bmXOC+F1FxEMF9dyiK2H5/1SUtzH0JuVo51h2wPfgyo=",
-            "reserved": [ 165, 44, 6 ],
-            "mtu": 1280,
-            "domain_strategy": "prefer_ipv6",
-            "fallback_delay": "300ms"
-        },
-        {
-            "type": "direct",
-            "tag": "direct"
-        }
+    "rules": [
+      {
+        "outbound": "WARP",
+        "server": "gdns",
+        "rewrite_ttl": 600
+      },
+      {
+        "outbound": "direct",
+        "server": "dns-local",
+        "rewrite_ttl": 600
+      },
+      {
+        "outbound": "any",
+        "server": "gdns",
+        "rewrite_ttl": 600
+      }
     ],
-    "route": {
-        "auto_detect_interface": false,
-        "final": "WARP",
-        "rules": [
-            {
-                "port": 53,
-                "outbound": "dns-out"
-            },
-            {
-                "port": 853,
-                "outbound": "dns-out"
-            },
-            {
-                "protocol": "dns",
-                "outbound": "dns-out"
-            }
-        ]
+    "final": "gdns",
+    "strategy": "prefer_ipv6",
+    "independent_cache": true
+  },
+  "inbounds": [
+    {
+      "type": "vless",
+      "listen": "::",
+      "listen_port": 10000,
+      "users": [
+        {
+          "name": "",
+          "uuid": "ffffffff-ffff-ffff-ffff-ffffffffffff"
+        }
+      ],
+      "transport": {
+        "type": "ws",
+        "path": "/mmmm",
+        "max_early_data": 2048,
+        "early_data_header_name": "Sec-WebSocket-Protocol"
+      }
     }
+  ],
+  "outbounds": [
+    {
+      "type": "dns",
+      "tag": "dns-out"
+    },
+    {
+      "type": "wireguard",
+      "tag": "WARP",
+      "domain_strategy": "prefer_ipv6",
+      "fallback_delay": "300ms",
+      "local_address": [
+        "172.16.0.2/32",
+        "2606:4700:110:8626:fd45:29e9:8b6b:3377/128"
+      ],
+      "private_key": "CA+fHUAME3ZC53jMj++Z5bSTBfuEXbP20EqaPuYHtXI=",
+      "server": "188.114.96.12",
+      "server_port": 878,
+      "peer_public_key": "bmXOC+F1FxEMF9dyiK2H5/1SUtzH0JuVo51h2wPfgyo=",
+      "reserved":  [ 165, 44, 6 ],
+      "mtu": 1280
+    },
+    {
+      "type": "direct",
+      "tag": "direct"
+    }
+  ],
+  "route": {
+    "rules": [
+      {
+        "port": 53,
+        "outbound": "dns-out"
+      },
+      {
+        "port": 853,
+        "outbound": "dns-out"
+      },
+      {
+        "protocol": "dns",
+        "outbound": "dns-out"
+      }
+    ],
+    "final": "WARP"
+  }
 }
+
