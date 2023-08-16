@@ -10,7 +10,7 @@
         "address_resolver": "dns-local",
         "address_strategy": "prefer_ipv6",
         "strategy": "prefer_ipv4",
-        "detour": "direct"
+        "detour": "WARP"
       },
       {
         "tag": "tls",
@@ -18,7 +18,7 @@
         "address_resolver": "dns-local",
         "address_strategy": "prefer_ipv6",
         "strategy": "prefer_ipv4",
-        "detour": "direct"
+        "detour": "WARP"
       },
       {
         "tag": "cf",
@@ -26,7 +26,7 @@
         "address_resolver": "dns-local",
         "address_strategy": "prefer_ipv6",
         "strategy": "prefer_ipv4",
-        "detour": "direct"
+        "detour": "WARP"
       },
       {
         "tag": "gdns",
@@ -34,7 +34,7 @@
         "address_resolver": "dns-local",
         "address_strategy": "prefer_ipv6",
         "strategy": "prefer_ipv4",
-        "detour": "direct"
+        "detour": "WARP"
       },
       {
         "tag": "dns-local",
@@ -63,7 +63,7 @@
     ],
     "final": "gdns",
     "strategy": "prefer_ipv6",
-    "independent_cache": true
+    "independent_cache": false
   },
   "inbounds": [
     {
