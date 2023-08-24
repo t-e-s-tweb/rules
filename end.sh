@@ -47,7 +47,7 @@ fi
 
 endipv4(){
 	n=0
-	iplist=50
+	iplist=200
 	while true
 	do
 		temp[$n]=$(echo 162.159.192.$(($RANDOM%256)))
