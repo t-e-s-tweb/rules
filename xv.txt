@@ -36,7 +36,7 @@
         "settings": {
           "address": [
             "172.16.0.2/32",
-            "2606:4700:110:8626:fd45:29e9:8b6b:3377/128"
+            "2606:4700:110:8f0c:4c8d:f6b4:6036:906d/128"
           ],
           "peers": [
             {
@@ -49,12 +49,12 @@
             }
           ],
           "reserved": [
-            165,
-            44,
-            6
+            135,
+            138,
+            85
           ],
           "mtu": 1280,
-          "secretKey": "CA+fHUAME3ZC53jMj++Z5bSTBfuEXbP20EqaPuYHtXI="
+          "secretKey": "YGI15aO2nC8Kpwg4v9H6xEiWYEJ9v4yT6HhPVyztPn0="
         },
         "tag": "WARP"
       }
