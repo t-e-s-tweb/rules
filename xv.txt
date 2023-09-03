@@ -66,6 +66,6 @@
       "downlinkOnly": 5,
       "statsUserUplink": false,
       "statsUserDownlink": false,
-      "bufferSize": 512
+      "bufferSize": 0
     }
   }
