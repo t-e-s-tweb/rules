@@ -34,7 +34,7 @@ echo "vm.dirty_ratio=50" | sudo tee -a /etc/sysctl.conf
 # Add network settings
 echo -e "\n# Custom network settings" | sudo tee -a /etc/sysctl.conf
 echo "net.ipv4.tcp_congestion_control=bbr" | sudo tee -a /etc/sysctl.conf
-echo "net.core.default_qdisc = fq" | sudo tee -a /etc/sysctl.conf
+echo "net.core.default_qdisc = cake" | sudo tee -a /etc/sysctl.conf
 
 # Apply the sysctl settings
 sudo sysctl --system
@@ -45,6 +45,8 @@ echo "z3fold" | sudo tee -a /etc/initramfs-tools/modules
 sudo update-initramfs -u
 
 # Run the BBR3 installation script
-bash <(curl -Ls https://raw.githubusercontent.com/Naochen2799/Latest-Kernel-BBR3/main/bbr3.sh)
-
+#bash <(curl -Ls https://raw.githubusercontent.com/Naochen2799/Latest-Kernel-BBR3/main/bbr3.sh)
+wget https://raw.githubusercontent.com/byJoey/Actions-bbr-v3/refs/heads/main/install.sh
+chmod +x install.sh
+sudo ./install.sh
 echo "Setup complete."
