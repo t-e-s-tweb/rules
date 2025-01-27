@@ -5,7 +5,10 @@ sudo apt update && sudo apt upgrade -y
 
 # Install required packages
 sudo apt install -y curl wget git
-
+# Clone and install zram-swap
+git clone https://github.com/foundObjects/zram-swap.git
+cd zram-swap && sudo ./install.sh
+cd ..
 # Create a 1GB swap file and enable it
 sudo dd if=/dev/zero of=/swapfile bs=1024 count=1048576
 sudo mkswap /swapfile
@@ -19,10 +22,7 @@ fi
 
 echo "Swap file created and enabled successfully."
 
-# Clone and install zram-swap
-git clone https://github.com/foundObjects/zram-swap.git
-cd zram-swap && sudo ./install.sh
-cd ..
+
 
 # Update /etc/sysctl.conf with VM parameters and network settings
 echo -e "\n# Custom VM settings" | sudo tee -a /etc/sysctl.conf
