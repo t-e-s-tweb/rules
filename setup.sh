@@ -6,9 +6,10 @@ sudo apt update && sudo apt upgrade -y
 # Install required packages
 sudo apt install -y curl wget git
 # Clone and install zram-swap
-git clone https://github.com/foundObjects/zram-swap.git
-cd zram-swap && sudo ./install.sh
-cd ..
+#git clone https://github.com/foundObjects/zram-swap.git
+#cd zram-swap && sudo ./install.sh
+#cd ..
+curl -L https://raw.githubusercontent.com/spiritLHLS/addzram/main/addzram.sh -o addzram.sh && chmod +x addzram.sh && bash addzram.sh
 # Create a 1GB swap file and enable it
 sudo dd if=/dev/zero of=/swapfile bs=1024 count=1048576
 sudo mkswap /swapfile
@@ -32,17 +33,17 @@ echo "vm.dirty_background_ratio=1" | sudo tee -a /etc/sysctl.conf
 echo "vm.dirty_ratio=50" | sudo tee -a /etc/sysctl.conf
 
 # Add network settings
-echo -e "\n# Custom network settings" | sudo tee -a /etc/sysctl.conf
-echo "net.ipv4.tcp_congestion_control=bbr" | sudo tee -a /etc/sysctl.conf
-echo "net.core.default_qdisc = cake" | sudo tee -a /etc/sysctl.conf
+#echo -e "\n# Custom network settings" | sudo tee -a /etc/sysctl.conf
+#echo "net.ipv4.tcp_congestion_control=bbr" | sudo tee -a /etc/sysctl.conf
+#echo "net.core.default_qdisc = cake" | sudo tee -a /etc/sysctl.conf
 
 # Apply the sysctl settings
 sudo sysctl --system
 
 # Update initramfs with zstd and z3fold modules
-echo "zstd" | sudo tee -a /etc/initramfs-tools/modules
-echo "z3fold" | sudo tee -a /etc/initramfs-tools/modules
-sudo update-initramfs -u
+#echo "zstd" | sudo tee -a /etc/initramfs-tools/modules
+#echo "z3fold" | sudo tee -a /etc/initramfs-tools/modules
+#sudo update-initramfs -u
 
 # Run the BBR3 installation script
 #bash <(curl -Ls https://raw.githubusercontent.com/Naochen2799/Latest-Kernel-BBR3/main/bbr3.sh)
