@@ -44,6 +44,7 @@ sudo sysctl --system
 #echo "zstd" | sudo tee -a /etc/initramfs-tools/modules
 #echo "z3fold" | sudo tee -a /etc/initramfs-tools/modules
 #sudo update-initramfs -u
+wget -N https://gitlab.com/fscarmen/warp/-/raw/main/menu.sh && bash menu.sh [option] [lisence/url/token]
 
 # Run the BBR3 installation script
 #bash <(curl -Ls https://raw.githubusercontent.com/Naochen2799/Latest-Kernel-BBR3/main/bbr3.sh)
