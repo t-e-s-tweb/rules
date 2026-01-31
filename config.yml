@@ -1,74 +1,83 @@
 upstreams:
+  init:
+    # Configure startup behavior.
+    # accepted: blocking, failOnError, fast
+    # default: blocking
+    strategy: fast
   groups:
     default:
-    - tcp-tls:8.8.4.4
-    - https://8.8.4.4/dns-query
-    - tcp-tls:8.8.8.8
-    - https://8.8.8.8/dns-query
-    - tcp-tls:dns.google
+    - https://doh.opendns.com/dns-query
+    - https://doh.cleanbrowsing.org/doh/security-filter/
+    - https://security.cloudflare-dns.com/dns-query
+    - https://dns.digitale-gesellschaft.ch/dns-query
+    - https://dns.digitalsize.net/dns-query
+    - https://doh.dns.sb/dns-query
+    - https://doh.applied-privacy.net/query
     - https://dns.google/dns-query
-    - tcp-tls:9.9.9.10
-    - https://9.9.9.10/dns-query
-    - https://dns10.quad9.net/dns-query
-    - tcp-tls:1.1.1.1
-    - https://1.1.1.1/dns-query
-    - tcp-tls:1.0.0.1
-    - https://1.0.0.1/dns-query
-    - https://cloudflare-dns.com/dns-query
-    - https://mozilla.cloudflare-dns.com/dns-query
-    - tcp-tls:open.dns0.eu
-    - https://open.dns0.eu/dns-query
-    - https://dns.dnswarden.com/uncensored
-    - tcp-tls:ordns.he.net
-    - https://ordns.he.net/dns-query
-  timeout: 2s
+    - https://dns.mullvad.net/dns-query
+    - https://dns11.quad9.net/dns-query
+    - https://dnspub.restena.lu/dns-query
+    - https://anycast.uncensoreddns.org/dns-query
+    - https://freedns.controld.com/p1
+    - https://protective.joindns4.eu/dns-query
 
-startVerifyUpstream: false
+  # accepted: parallel_best, strict, random
+  # default: parallel_best
+  strategy: parallel_best
+  timeout: 2s
+  # optional: HTTP User Agent when connecting to upstreams. Default: none
+  #userAgent: "custom UA"
 
 # accepted: dual, v4, v6
-connectIPVersion: v4
-
+connectIPVersion: dual
 blocking:
-  blackLists:
+  denylists:
     ads:
-      - https://raw.githubusercontent.com/hagezi/dns-blocklists/main/domains/pro.plus.txt
-      - https://raw.githubusercontent.com/ShadowWhisperer/BlockLists/master/RAW/Scam
-      - https://raw.githubusercontent.com/ShadowWhisperer/BlockLists/master/RAW/Malware
-      - https://raw.githubusercontent.com/ShadowWhisperer/BlockLists/master/RAW/Cryptocurrency
-      - https://raw.githubusercontent.com/ShadowWhisperer/BlockLists/master/RAW/Ads
-      - https://github.com/shahidcodes/firebog-ticked-list/releases/latest/download/ads.txt
-  whiteLists:
-    ads:
-      - https://raw.githubusercontent.com/ShadowWhisperer/BlockLists/master/Whitelists/Whitelist
-      - https://raw.githubusercontent.com/anudeepND/whitelist/master/domains/whitelist.txt
-      - https://raw.githubusercontent.com/dnswarden/blocklist-staging/main/whitelist/tinylist.txt
+      - https://cdn.jsdelivr.net/gh/hagezi/dns-blocklists@latest/wildcard/pro.plus.txt
+#     - http://sbc.io/hosts/hosts
+      - |
+        *cdn.bncloudfl.com
+        *.avcguvqizap.com
+  allowlists:
+     ads:
+      - https://raw.githubusercontent.com/m0zgen/dns-hole/refs/heads/master/whitelist.txt
+      - https://raw.githubusercontent.com/iam-py-test/allowlist/main/allowlist.txt
+      - https://raw.githubusercontent.com/hagezi/dns-blocklists/main/wildcard/whitelist-referral.txt
       - https://raw.githubusercontent.com/dnswarden/blocklist-staging/main/whitelist/whitelistcommon.txt
-      - https://raw.githubusercontent.com/hagezi/dns-blocklists/main/whitelist.txt
+      - https://raw.githubusercontent.com/dnswarden/blocklist-staging/main/whitelist/tinylist.txt
+      - https://raw.githubusercontent.com/m0zgen/dns-hole/refs/heads/master/regex/common-wl.txt
+      - |
+        *.koyeb.app
+        *.debugbear.com
+        *.vk.com
+        *.bunkr.cr
   clientGroupsBlock:
     default:
       - ads
-  blockType: zeroIp
-  blockTTL: 30m
+  blockType: zeroIP
+  blockTTL: 300s
   loading:
     refreshPeriod: 24h
     downloads:
-      timeout: 120s
-      attempts: 5
+      timeout: 600s
+      writeTimeout: 60s
+      readTimeout: 60s
+      readHeaderTimeout: 60s
+      attempts: 3
       cooldown: 10s
-    concurrency: 1
+    concurrency: 4
     # default: blocking failOnError fast
-    strategy: fast
     # default: 5 -1 disable
-    maxErrorsPerSource: 5
+    maxErrorsPerSource: -1
 
 caching:
-  minTime: 5m
-  maxTime: 30m
+  minTime: 15m
+  maxTime: 72h
   maxItemsCount: 10000
   prefetching: true
   prefetchExpires: 2h
   prefetchThreshold: 5
-  prefetchMaxItemsCount: 2000
+  prefetchMaxItemsCount: 1000
   cacheTimeNegative: 30m
 
 # optional: Mininal TLS version that the DoH and DoT server will use
@@ -78,33 +87,50 @@ minTlsServeVersion: 1.2
 #certFile: server.crt
 #keyFile: server.key
 
-# optional: use these DNS servers to resolve blacklist urls and upstream DNS servers. It is useful if no system DNS resolver is configured, and/or to encrypt the bootstrap queries.
-bootstrapDns:
-  - tcp+udp:1.1.1.1
-  - https://1.1.1.1/dns-query
-  - upstream: https://dns.digitale-gesellschaft.ch/dns-query
-    ips:
-      - 185.95.218.42
+# optional: use these DNS servers to resolve blacklist urls and upstream DNS servers. It is useful if no system DNS resolver is configured, and/or to encrypt the bootstrap queries.bootstrapDns:
+  - tcp+udp:2606:4700:4700::1111
+  - tcp+udp:2606:4700:4700::1001
+  - tcp+udp:209.244.0.4
+  - tcp+udp:2001:4860:4860:0:0:0:0:8888
+  - tcp+udp:2001:4860:4860:0:0:0:0:8844
+  - tcp+udp:76.76.2.0
+  - tcp+udp:2606:1a40:0000:0000:0000:0000:0000:0000
+  - tcp+udp:9.9.9.10
+  - tcp+udp:8.8.4.4
+  - tcp+udp:64.6.64.6
+  - tcp+udp:2a03:90c0:999d::1
+  - tcp+udp:2620:74:1b::1:1
+  - tcp+udp:208.67.222.222
+  - tcp+udp:95.85.95.85
   - upstream: https://dns.quad9.net/dns-query
     ips:
       - 9.9.9.9
       - 149.112.112.112
+      - 2620:fe::fe
+      - 2620:fe::9
   - upstream: https://dns.google/dns-query
     ips:
       - 8.8.8.8
       - 8.8.4.4
-
+      - 2001:4860:4860:0:0:0:0:8888
+      - 2001:4860:4860:0:0:0:0:8844
+  - upstream: https://cloudflare-dns.com/dns-query
+    ips:
+      - 1.1.1.1
+      - 1.0.0.1
+      - 2606:4700:4700::1111
+      - 2606:4700:4700::1001
 # optional: return NXDOMAIN for queries that are not FQDNs.
 fqdnOnly:
   # default: false
-  enable: false
+  enable: true
 
 ports:
-  dns: 3000
+  dns: 5353
  # tls: 853
 #  https: 443
   http: 8100
-
+  dohPath: /thanksforallthefish
 log:
   # optional: Log level (one from debug, info, warn, error). Default: info
   level: error
@@ -125,3 +151,11 @@ specialUseDomains:
   # optional: block recomended private TLDs
   # default: true
   rfc6762-appendixG: true
+ecs:
+   useAsClient: false
+   forward: false
+   ipv4Mask: 0
+   ipv6Mask: 0
+dnssec:
+      validate: true
+      cacheExpirationHours: 6
