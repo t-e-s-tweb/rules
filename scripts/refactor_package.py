@@ -89,8 +89,8 @@ PROGUARD_CONTENT = """
 # ======================
 # Keep Models & Annotations
 # ======================
--keep class com.v2ray.** { *; }
--keepclassmembers class com.v2ray.** { *; }
+-keep class com.clearpath.** { *; }
+-keepclassmembers class com.clearpath.** { *; }
 
 -keepattributes *Annotation*
 -keepattributes Signature
