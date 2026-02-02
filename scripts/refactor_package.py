@@ -4,7 +4,7 @@ import shutil
 from pathlib import Path
 
 OLD_PACKAGE = "com.v2ray.ang"
-NEW_PACKAGE = "com.clearpath.vng"
+NEW_PACKAGE = "com.v2ray.ang"
 
 OLD_PACKAGE_SLASH = OLD_PACKAGE.replace(".", "/")
 NEW_PACKAGE_SLASH = NEW_PACKAGE.replace(".", "/")
