@@ -67,7 +67,7 @@ EXECUTE_EXT = {
 }
 
 ENABLE_PROGUARD = True
-REPLACE_PROGUARD = True
+REPLACE_PROGUARD = False
 PROGUARD_CONTENT = """
 # Keep Enums (needed for proper serialization/deserialization)
 -keepclassmembers enum * {
