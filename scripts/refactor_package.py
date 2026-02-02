@@ -201,7 +201,7 @@ def main():
     # 检查是否已替换，防止重复执行
     if not replace_in_file(BUILD_GRADLE_FILE, OLD_PACKAGE, NEW_PACKAGE):
         print("Package name already updated.")
-        return
+        
 
     # 创建新的包目录结构
     NEW_PACKAGE_PATH.mkdir(parents=True, exist_ok=True)
