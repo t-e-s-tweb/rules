@@ -67,7 +67,7 @@ EXECUTE_EXT = {
 }
 
 ENABLE_PROGUARD = True
-REPLACE_PROGUARD = False
+REPLACE_PROGUARD = True
 PROGUARD_CONTENT = """
 # Keep Enums (needed for proper serialization/deserialization)
 -keepclassmembers enum * {
@@ -297,7 +297,7 @@ def main():
         set_gradle_property(
           PERFORMANCE_GRADLE_FILE,
           "android.r8.optimizedResourceShrinking",
-          "true" if ENABLE_PROGUARD else "false",
+          "false" if ENABLE_PROGUARD else "false",
         )
     else:
         # 将 (is)MinifyEnabled true -> false（仅 release block）
