@@ -85,7 +85,7 @@ PROGUARD_CONTENT = """
 -keep class * extends android.content.BroadcastReceiver
 -keep class * extends android.content.ContentProvider
 -keep class * extends android.app.Application
-
+-keepnames class com.clearpath.vng.** { *; }
 # ======================
 # Keep Models & Annotations
 # ======================
